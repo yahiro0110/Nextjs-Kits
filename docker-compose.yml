@@ -1,0 +1,15 @@
+services:
+    nextjs:
+        build: .
+        container_name: nextjs-app
+        ports:
+            - '3000:3000'
+        volumes:
+            - ./client:/var/www
+        working_dir: /var/www
+        restart: unless-stopped
+        healthcheck:
+            test: ['CMD', 'curl', '-f', 'http://localhost:3000']
+            interval: 30s
+            timeout: 10s
+            retries: 3
